@@ -216,9 +216,6 @@ static bool run_check = false;
 // a font for rendering text
 cFontPtr font;
 
-// a label to display the rate [Hz] at which the simulation is running
-cLabel* labelRates;
-
 // a flag to indicate if the haptic simulation currently running
 bool simulationRunning = false;
 
@@ -526,10 +523,6 @@ int main(int argc, char* argv[])
     // create a font
     font = NEW_CFONTCALIBRI20();
 
-    // create a label to display the haptic and graphic rate of the simulation
-    labelRates = new cLabel(font);
-    camera->m_frontLayer->addChild(labelRates);
-
     //--------------------------------------------------------------------------
     // START SIMULATION
     //--------------------------------------------------------------------------
@@ -754,18 +747,6 @@ void close(void)
 
 void updateGraphics(void)
 {
-    /////////////////////////////////////////////////////////////////////
-    // UPDATE WIDGETS
-    /////////////////////////////////////////////////////////////////////
-
-    // update haptic and graphic rate data
-    labelRates->setText(cStr(freqCounterGraphics.getFrequency(), 0) + " Hz / " +
-        cStr(freqCounterHaptics.getFrequency(), 0) + " Hz");
-
-    // update position of label
-    labelRates->setLocalPos((int)(0.5 * (width - labelRates->getWidth())), 15);
-
-
     /////////////////////////////////////////////////////////////////////
     // RENDER SCENE
     /////////////////////////////////////////////////////////////////////
